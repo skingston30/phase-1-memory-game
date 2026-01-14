@@ -1,0 +1,25 @@
+h1 {
+    text-align: center;
+}
+.score-card{
+    text-align: center;
+}
+#grid-container {
+  display: inline;
+  /* Creates as many 100px columns as will fit, then distributes extra space */
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.grid-item {
+  aspect-ratio: 1 / 1; /* Keeps cells square */
+  background-color: #3498db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+}
