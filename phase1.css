@@ -65,3 +65,10 @@ h1 {
     transform: rotateY(180deg);
     /* Pre-rotated so it faces "away" initially */
 }
+#score,
+#attempts{
+    font-weight: bold;
+    justify-content: space-evenly;
+    text-align: center;
+    
+}

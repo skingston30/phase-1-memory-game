@@ -45,9 +45,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
       attempts++;
       updateDisplay(); // We will write this function next
       
-      if (score === totalPairs) {
-        setTimeout(() => alert(`You won in ${attempts} tries!`), 500);
-      }
       resetTracker();
     } else {
       // NO MATCH
@@ -55,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
       updateDisplay();
       lockBoard = true;
       setTimeout(() => {
-        firstCard.querySelector('.card-inner').classList.remove('is-flipped');
+       firstCard.querySelector('.card-inner').classList.remove('is-flipped');
         secondCard.querySelector('.card-inner').classList.remove('is-flipped');
         resetTracker();
       }, 1500);
@@ -98,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
   // Function to update the text on your screen
 function updateDisplay() {
-  // Assuming you add <p> tags in your HTML with these IDs
+  
   document.getElementById('score').innerText = `Matches: ${score}`;
   document.getElementById('attempts').innerText = `Tries: ${attempts}`;
 }
@@ -106,8 +103,8 @@ function updateDisplay() {
 // The Reset Function
 function resetGame() {
   // 1. Clear the board
-  container.innerHTML = '';
   
+  container.innerHTML = '';
   // 2. Reset the logic
   [score, attempts, firstCard, secondCard, lockBoard] = [0, 0, null, null, false];
   
@@ -116,5 +113,8 @@ function resetGame() {
   createMatchingGrid(values);
   updateDisplay();
 }
- 
+
+const button = document.getElementById("restartGame");
+button.addEventListener('click', resetGame)
+
 });
