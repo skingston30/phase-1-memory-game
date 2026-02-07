@@ -24,7 +24,6 @@ body{
     font-weight: bold;
     border-radius: 4px;
 }
-/* The inner element that actually rotates */
 .card-inner {
     position: relative;
     width: 100px;
@@ -32,7 +31,6 @@ body{
     transition: transform 0.6s;
     transform-style: preserve-3d;
 }
-/* The class we will toggle with JavaScript */
 .is-flipped {
     transform: rotateY(180deg);
 }
@@ -42,30 +40,26 @@ body{
     width: 100px;
     height: 100px;
     backface-visibility: hidden;
-    /* Important: hides the side not facing the user */
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
     font-size: 2rem;
 }
-/* Styling the "Back" (the side the user sees first) */
 .card-back {
     background-color: #2c3e50;
     color: white;
 }
-/* Styling the "Front" (the side with the icon/value) */
 .card-front {
     background-color: #c9edf6;
     transform: rotateY(180deg);
-    /* Pre-rotated so it faces "away" initially */
 }
 .firework {
   position: absolute;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff; /* We'll change this with JS */
+  box-shadow: 0 0 #fff, 0 0 #fff, 0 0 #fff, 0 0 #fff; 
   animation: explode 1s ease-out forwards;
   pointer-events: none;
 }

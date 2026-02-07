@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
   let score = 0;
   let attempts = 0;
-  const totalPairs = values.length / 2; // In your case, 10
+  const totalPairs = values.length / 2; 
 
   //function for shuffling the cards
   function shuffleCards(array) {
@@ -45,10 +45,12 @@ document.addEventListener('DOMContentLoaded', function (e) {
   }
   confetti(); 
 }
-  // --- 3. THE MATCHING LOGIC ---
+
+
+  // function to handle how to cards work and the matching logic 
   const handleFlip = (e) => {
     const clickedCard = e.currentTarget;
-    const inner = clickedCard.querySelector('.card-inner'); // Target the flippable part
+    const inner = clickedCard.querySelector('.card-inner'); 
 
     if (lockBoard || clickedCard === firstCard) return;
 
@@ -68,10 +70,11 @@ document.addEventListener('DOMContentLoaded', function (e) {
       // MATCH!
       score++;
       attempts++;
-      updateDisplay(); // We will write this function next
+      updateDisplay(); 
       
       if (score === totalPairs) {
-       celebrate(); // <--- THIS is the trigger!
+       celebrate(); 
+       
     }
       resetTracker();
     } else {
@@ -92,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
   };
   
 
-  // --- 4. THE GRID CREATOR (Merged version) ---
+  // function to make the cards 
   function createMatchingGrid(cards) {
     cards.forEach(value => {
       const card = document.createElement('div');
@@ -113,7 +116,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
       inner.appendChild(back);
       card.appendChild(inner);
 
-      // Now "card" is defined right here, so we attach the listener!
       card.addEventListener('click', handleFlip);
 
       container.appendChild(card);
@@ -124,9 +126,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
   // Function to update the text on your screen
 function updateDisplay() {
-  
+  const best = localStorage.getItem('matchingGameBest') || '--';
   document.getElementById('score').innerText = `Matches: ${score}`;
   document.getElementById('attempts').innerText = `Tries: ${attempts}`;
+  
 }
 
 // The Reset Function
@@ -136,7 +139,7 @@ function resetGame() {
   //Reset the logic
   [score, attempts, firstCard, secondCard, lockBoard] = [0, 0, null, null, false];
   
-  // 3. Shuffle and Rebuild
+  //Shuffle and Rebuild
   shuffleCards(values);
   createMatchingGrid(values);
   updateDisplay();
