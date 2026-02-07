@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function (e) {
+ 
+  e.preventDefault;
 
   const container = document.getElementById('grid-container');
   const values = ['🍎', '🍌', '🍇', '🍓', '🍋', '🍐', '🍊', '🍉', '🍍', '🥭', '🍎', '🍌', '🍇', '🍓', '🍋', '🍐', '🍊', '🍉', '🍍', '🥭'];
@@ -20,6 +22,29 @@ document.addEventListener('DOMContentLoaded', function (e) {
   }
   shuffleCards(values);
 
+  // Function for the fireworks that go off when the game is won
+  function celebrate() {
+  console.log("Fireworks launched!");
+  for (let i = 0; i < 10; i++) {
+    setTimeout(() => {
+      const firework = document.createElement('div');
+      firework.className = 'firework';
+      
+      // Random position on screen
+      firework.style.left = Math.random() * 100 + 'vw';
+      firework.style.top = Math.random() * 100 + 'vh';
+      
+      // Random color
+      const colors = ['#ff0044', '#00ff44', '#0044ff', '#ffff44'];
+      firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      
+      document.body.appendChild(firework);
+      
+      setTimeout(() => firework.remove(), 1000);
+    }, i * 200); 
+  }
+  confetti(); 
+}
   // --- 3. THE MATCHING LOGIC ---
   const handleFlip = (e) => {
     const clickedCard = e.currentTarget;
@@ -45,6 +70,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
       attempts++;
       updateDisplay(); // We will write this function next
       
+      if (score === totalPairs) {
+       celebrate(); // <--- THIS is the trigger!
+    }
       resetTracker();
     } else {
       // NO MATCH
@@ -62,6 +90,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
   const resetTracker = () => {
     [firstCard, secondCard, lockBoard] = [null, null, false];
   };
+  
 
   // --- 4. THE GRID CREATOR (Merged version) ---
   function createMatchingGrid(cards) {
@@ -102,10 +131,9 @@ function updateDisplay() {
 
 // The Reset Function
 function resetGame() {
-  // 1. Clear the board
-  
+  //Clear the board
   container.innerHTML = '';
-  // 2. Reset the logic
+  //Reset the logic
   [score, attempts, firstCard, secondCard, lockBoard] = [0, 0, null, null, false];
   
   // 3. Shuffle and Rebuild
